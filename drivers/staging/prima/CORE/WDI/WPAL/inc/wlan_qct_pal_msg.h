@@ -76,30 +76,30 @@ struct swpt_msg
 
 
 /*---------------------------------------------------------------------------
-   wpalPostCtrlMsg â€“ Post a message to control context so it can 
+   wpalPostCtrlMsg – Post a message to control context so it can 
                            be processed in that context.
    Param: 
-      pPalContext â€“ A PAL context
-      pMsg â€“ a pointer to called allocated object; Caller retain the ownership 
+      pPalContext – A PAL context
+      pMsg – a pointer to called allocated object; Caller retain the ownership 
              after this API returns.
 ---------------------------------------------------------------------------*/
 wpt_status wpalPostCtrlMsg(void *pPalContext, wpt_msg *pMsg);
 
 
 /*---------------------------------------------------------------------------
-   wpalPostTxMsg â€“ Post a message to TX context so it can be processed in that context.
+   wpalPostTxMsg – Post a message to TX context so it can be processed in that context.
    Param: 
-      pPalContext â€“ A PAL context
-      pMsg â€“ a pointer to called allocated object; Caller retain the ownership 
+      pPalContext – A PAL context
+      pMsg – a pointer to called allocated object; Caller retain the ownership 
              after this API returns.
 ---------------------------------------------------------------------------*/
 wpt_status wpalPostTxMsg(void *pPalContext, wpt_msg *pMsg);
 
 /*---------------------------------------------------------------------------
-   wpalPostRxMsg â€“ Post a message to RX context so it can be processed in that context.
+   wpalPostRxMsg – Post a message to RX context so it can be processed in that context.
    Param: 
-      pPalContext â€“ A PAL context
-      pMsg â€“ a pointer to called allocated object; Caller retain the ownership 
+      pPalContext – A PAL context
+      pMsg – a pointer to called allocated object; Caller retain the ownership 
              after this API returns.
 ---------------------------------------------------------------------------*/
 wpt_status wpalPostRxMsg(void *pPalContext, wpt_msg *pMsg);

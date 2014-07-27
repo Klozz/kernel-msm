@@ -116,7 +116,7 @@
 /*---------------------------------------------------------------------------
     wpalOpen -  Initialize PAL
     Param: 
-       ppPalContext â€“ pointer to a caller allocated pointer. It is opaque to caller.
+       ppPalContext – pointer to a caller allocated pointer. It is opaque to caller.
                       Caller save the returned pointer for future use when calling
                       PAL APIs. If this is NULL, it means that PAL doesn't need it.
        pOSContext - Pointer to a context that is OS specific. This is NULL is a 
@@ -129,7 +129,7 @@ wpt_status wpalOpen(void **ppPalContext, void *pOSContext);
 /*---------------------------------------------------------------------------
     wpalClose - Release PAL
     Param: 
-       pPalContext â€“ pointer returned from wpalOpen.
+       pPalContext – pointer returned from wpalOpen.
     Return:
        eWLAN_PAL_STATUS_SUCCESS - success. Otherwise fail.
 ---------------------------------------------------------------------------*/
@@ -146,17 +146,17 @@ wpt_status wpalClose(void *pPalContext);
 /*---------------------------------------------------------------------------
     wpalMemoryAllocate -  Allocate memory
     Param: 
-       size â€“ number of bytes to allocate
+       size – number of bytes to allocate
     Return:
        A pointer to the allocated memory. 
-       NULL â€“ fail to allocate memory
+       NULL – fail to allocate memory
 ---------------------------------------------------------------------------*/
 void *wpalMemoryAllocate(wpt_uint32 size);
 
 /*---------------------------------------------------------------------------
     wpalMemoryFree -  Free allocated memory
     Param: 
-       pv â€“ pointer to buffer to be freed
+       pv – pointer to buffer to be freed
     Return:
        None
 ---------------------------------------------------------------------------*/
@@ -166,9 +166,9 @@ void wpalMemoryFree(void *pv);
 /*---------------------------------------------------------------------------
     wpalMemoryCopy -  copy memory
     Param: 
-       dest â€“ address which data is copied to
-       src â€“ address which data is copied from
-       size â€“ number of bytes to copy
+       dest – address which data is copied to
+       src – address which data is copied from
+       size – number of bytes to copy
     Return:
        eWLAN_PAL_STATUS_SUCCESS
        eWLAN_PAL_STATUS_INVALID_PARAM
@@ -179,20 +179,20 @@ wpt_status wpalMemoryCopy(void * dest, void * src, wpt_uint32 size);
 /*---------------------------------------------------------------------------
     wpalMemoryCompare -  compare memory
     Param: 
-       buf1 â€“ address of buffer1
-       buf2 â€“ address of buffer2
-       size â€“ number of bytes to compare
+       buf1 – address of buffer1
+       buf2 – address of buffer2
+       size – number of bytes to compare
     Return:
-       eWLAN_PAL_TRUE â€“ if two buffers have same content
-       eWLAN_PAL_FALSE â€“ not match
+       eWLAN_PAL_TRUE – if two buffers have same content
+       eWLAN_PAL_FALSE – not match
 ---------------------------------------------------------------------------*/
 wpt_boolean wpalMemoryCompare(void * buf1, void * buf2, wpt_uint32 size);
 
 /*---------------------------------------------------------------------------
     wpalMemoryZero -  Zero memory
     Param: 
-       buf â€“ address of buffer to be zero
-       size â€“ number of bytes to zero
+       buf – address of buffer to be zero
+       size – number of bytes to zero
     Return:
        None
 ---------------------------------------------------------------------------*/
@@ -202,8 +202,8 @@ void wpalMemoryZero(void *buf, wpt_uint32 size);
 /*---------------------------------------------------------------------------
     wpalMemoryFill -  Fill memory with one pattern
     Param: 
-       buf â€“ address of buffer to be zero
-       size â€“ number of bytes to zero
+       buf – address of buffer to be zero
+       size – number of bytes to zero
        bFill - one byte of data to fill in (size) bytes from the start of the buffer
     Return:
        None
@@ -215,11 +215,11 @@ void wpalMemoryFill(void *buf, wpt_uint32 size, wpt_byte bFill);
     wpalDmaMemoryAllocate -  Allocate memory ready for DMA. Aligned at 4-byte
     Param: 
        pPalContext - PAL context pointer
-       size â€“ number of bytes to allocate
-       ppPhysicalAddr â€“ Physical address of the buffer if allocation succeeds
+       size – number of bytes to allocate
+       ppPhysicalAddr – Physical address of the buffer if allocation succeeds
     Return:
        A pointer to the allocated memory (virtual address). 
-       NULL â€“ fail to allocate memory
+       NULL – fail to allocate memory
 -----------------------------------------------------------------------------*/
 void *wpalDmaMemoryAllocate(wpt_uint32 size, void **ppPhysicalAddr);
 
@@ -227,7 +227,7 @@ void *wpalDmaMemoryAllocate(wpt_uint32 size, void **ppPhysicalAddr);
     wpalDmaMemoryFree -  Free memory ready for DMA
     Param: 
        pPalContext - PAL context pointer
-       pv â€“ address for the buffer to be freed
+       pv – address for the buffer to be freed
     Return:
        None
 ---------------------------------------------------------------------------*/
