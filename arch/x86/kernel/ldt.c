@@ -231,7 +231,6 @@ static int write_ldt(void __user *ptr, unsigned long bytecount, int oldmode)
 		}
 	}
 
-<<<<<<< HEAD
 	/*
 	 * On x86-64 we do not support 16-bit segments due to
 	 * IRET leaking the high bits of the kernel stack address.
@@ -243,8 +242,6 @@ static int write_ldt(void __user *ptr, unsigned long bytecount, int oldmode)
 	}
 #endif
 
-=======
->>>>>>> parent of 250c9f8... Linux 3.4.89
 	fill_ldt(&ldt, &ldt_info);
 	if (oldmode)
 		ldt.avl = 0;
