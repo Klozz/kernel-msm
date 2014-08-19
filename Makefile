@@ -1,6 +1,6 @@
 VERSION = 3
 PATCHLEVEL = 4
-SUBLEVEL = 102
+SUBLEVEL = 103
 EXTRAVERSION =
 NAME = Saber-toothed Squirrel
 
@@ -359,14 +359,14 @@ CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 CFLAGS_MODULE = -DMODULE -fno-pic \
 		-marm -mfpu=neon-vfpv4 \
 		-mvectorize-with-neon-quad -fgcse-after-reload -fgcse-sm -fgcse-las \
-		-ftree-loop-im -ftree-loop-ivcanon \
+		-ftree-loop-im -ftree-loop-ivcanon -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -floop-flatten\
 		-fivopts
 AFLAGS_MODULE   =
 LDFLAGS_MODULE  =
 CFLAGS_KERNEL =-mtune=cortex-a7 \
 		-marm -mfpu=neon-vfpv4 -mvectorize-with-neon-quad -fgcse-after-reload 		-fgcse-sm -fgcse-las \
 		-ftree-loop-im -ftree-loop-ivcanon \
-		-fivopts -ftree-vectorize \
+		-fivopts -ftree-vectorize -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -floop-flatten\
 		-ffast-math
 AFLAGS_KERNEL	=
 CFLAGS_GCOV	= -fprofile-arcs -ftest-coverage
@@ -393,6 +393,8 @@ KBUILD_CFLAGS := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		 -march=armv7-a -mtune=cortex-a7 \
 		 -ffast-math -fsingle-precision-constant \
 		 -ftree-loop-im -ftree-loop-ivcanon \
+		 -ftree-loop-linear -floop-interchange \
+		 -floop-strip-mine -floop-block -floop-flatten \
 		 -fivopts -ftree-vectorize \
 		 -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr
 KBUILD_AFLAGS_KERNEL :=
