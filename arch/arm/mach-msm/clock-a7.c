@@ -248,7 +248,18 @@ static void get_speed_bin(struct platform_device *pdev, int *bin, int *version)
  dev_info(&pdev->dev, "Speed bin being set to 1 for overclock!\n");
  *bin = 1;
 #else
-	if (!valid) {
+  	if (!valid) {
+		dev_info(&pdev->dev, "Speed bin not set. Defaulting to 0!\n");
+		*bin = 0;
+	} else {
+		dev_info(&pdev->dev, "Speed bin: %d\n", *bin);
+	}
+#endif
+#ifdef CONFIG_CPU_MINI_OVERCLOCK
+ dev_info(&pdev->dev, "Speed bin being set to 2 for Mini overclock!\n");
+ *bin = 2;
+#else
+ 	if (!valid) {
 		dev_info(&pdev->dev, "Speed bin not set. Defaulting to 0!\n");
 		*bin = 0;
 	} else {

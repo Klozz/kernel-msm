@@ -1917,6 +1917,12 @@ config CPU_OVERCLOCK
 	default n
 	help
 	Simple CPU Overclocking Option to 1.6 GHz
+	
+config CPU_MINI_OVERCLOCK
+	bool "enable CPU Mini overclocking of Cortex A7"
+	default n
+	help
+	Simple CPU Overclocking Option to 1.4 GHz is more stable overclock
 
 config CPU_UNDERCLOCK
 	bool "enable CPU underclocking option"
