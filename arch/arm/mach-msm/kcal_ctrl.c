@@ -1,4 +1,4 @@
-+/*
+/*
  * arch/arm/mach-msm/kcal_ctrl.c
  *
  * Copyright (C) 2014 Savoca
