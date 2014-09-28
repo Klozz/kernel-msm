@@ -301,7 +301,7 @@ static void detect_sweep2wake_h(int x, int y, bool st, bool wake)
                 x, y, (single_touch) ? "true" : "false");
 #endif
 	//left->right
-	if (firstx < 360 && single_touch &&
+	if (firstx < 350 && single_touch &&
 		((wake && (s2w_switch & SWEEP_RIGHT)) || (!wake && (s2s_switch & SWEEP_RIGHT)))) {
 		prevx = 0;
 		nextx = S2W_X_B1;
@@ -331,7 +331,7 @@ static void detect_sweep2wake_h(int x, int y, bool st, bool wake)
 			}
 		}
 	//right->left
-	} else if (firstx >= 510 && single_touch &&
+	} else if (firstx >= 350 && single_touch &&
 		((wake && (s2w_switch & SWEEP_LEFT)) || (!wake && (s2s_switch & SWEEP_LEFT)))) {
 		prevx = (S2W_X_MAX - S2W_X_FINAL);
 		nextx = S2W_X_B2;
@@ -472,23 +472,6 @@ static struct input_handler s2w_input_handler = {
 	.id_table	= s2w_ids,
 };
 
-#ifdef CONFIG_POWERSUSPEND
-static void s2w_power_suspend(struct power_suspend *h) {
-	    s2w_scr_suspended = scr_suspended;
-	    s2w_scr_suspended = true;
-}
-
-static void s2w_power_resume(struct power_suspend *h) {
-	    s2w_scr_suspended = scr_suspended;	
-	    s2w_scr_suspended = false;
-}
-
-static struct power_suspend s2w_power_suspend_handler = {
-	.suspend = s2w_power_suspend,
-	.resume = s2w_power_resume,
-};
-#endif
-
 #ifndef CONFIG_HAS_EARLYSUSPEND
 static int lcd_notifier_callback(struct notifier_block *this,
 				unsigned long event, void *data)
@@ -506,7 +489,8 @@ static int lcd_notifier_callback(struct notifier_block *this,
 
 	return 0;
 }
-#else
+#endif
+#ifdef CONFIG_HAS_EARLYSUSPEND
 static void s2w_early_suspend(struct early_suspend *h) {
 	scr_suspended = true;
 	s2w_scr_suspended = scr_suspended;
@@ -523,6 +507,25 @@ static struct early_suspend s2w_early_suspend_handler = {
 	.resume = s2w_late_resume,
 };
 #endif
+#ifdef CONFIG_POWERSUSPEND
+static void s2w_power_suspend(struct power_suspend *h) {
+	    s2w_scr_suspended = scr_suspended;
+	    s2w_scr_suspended = true;
+	    scr_suspended = true;
+}
+
+static void s2w_power_resume(struct power_suspend *h) {
+	    s2w_scr_suspended = scr_suspended;	
+	    s2w_scr_suspended = false;
+	    scr_suspended = false;
+}
+
+static struct power_suspend s2w_power_suspend_handler = {
+	.suspend = s2w_power_suspend,
+	.resume = s2w_power_resume,
+};
+#endif
+
 
 /*
  * SYSFS stuff below here
@@ -738,6 +741,9 @@ static void __exit sweep2wake_exit(void)
 #endif
 #ifndef CONFIG_HAS_EARLYSUSPEND
 	lcd_unregister_client(&s2w_lcd_notif);
+#endif
+#ifdef CONFIG_POWERSUSPEND
+ register_power_suspend(&s2w_power_suspend_handler);
 #endif
 	input_unregister_handler(&s2w_input_handler);
 	destroy_workqueue(s2w_input_wq);
