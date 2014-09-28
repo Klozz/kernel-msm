@@ -90,7 +90,7 @@ MODULE_LICENSE("GPLv2");
 #define S2W_X_B2                360
 //#define DEFAULT_S2W_X_FINAL           160
 #define S2W_X_FINAL 		275
-#define S2W_Y_NEXT 		160
+#define S2W_Y_NEXT 		180
 
 #define DEFAULT_S2W_Y_MAX               1280
 #define DEFAULT_S2W_X_MAX               720
@@ -99,7 +99,7 @@ MODULE_LICENSE("GPLv2");
 #define DEFAULT_S2W_X_B2                360
 //#define DEFAULT_S2W_X_FINAL           160
 #define DEFAULT_S2W_X_FINAL 		275
-#define DEFAULT_S2W_Y_NEXT 		160
+#define DEFAULT_S2W_Y_NEXT 		180
 #endif
 
 /* Wake Gestures */
@@ -223,7 +223,7 @@ static void detect_sweep2wake_v(int x, int y, bool st)
 		firsty_time = jiffies;
 	}
 
-	if (x > 100 && x < 980) {
+	if (x > 100 && x < 620) {
 		//up
 		if (firsty > 960 && single_touch && (s2w_switch & SWEEP_UP)) {
 			prevy = firsty;
@@ -301,7 +301,7 @@ static void detect_sweep2wake_h(int x, int y, bool st, bool wake)
                 x, y, (single_touch) ? "true" : "false");
 #endif
 	//left->right
-	if (firstx < 510 && single_touch &&
+	if (firstx < 360 && single_touch &&
 		((wake && (s2w_switch & SWEEP_RIGHT)) || (!wake && (s2s_switch & SWEEP_RIGHT)))) {
 		prevx = 0;
 		nextx = S2W_X_B1;
