@@ -13,6 +13,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
+ * 
  */
 #include <linux/cpu.h>
 #include <linux/cpufreq.h>
@@ -24,6 +25,8 @@
 #include <linux/module.h>
 #include <linux/slab.h>
 #include "../mach-msm/acpuclock.h"
+
+#define KH_STP "1.2"
 
 static DEFINE_MUTEX(klozz_hotplug_mutex);
 static struct mutex timer_mutex;
@@ -732,5 +735,6 @@ MODULE_AUTHOR("Carlos "Klozz" Jesus TeamMEX@XDA");
 MODULE_DESCRIPTION("'klozz_hotplug' - A cpu hotplug driver for "
 	"capable processors");
 MODULE_LICENSE("GPL");
+MODULE_VERSION(KH_STP);
 module_init(klozz_hotplug_init);
 module_exit(klozz_hotplug_exit); 
