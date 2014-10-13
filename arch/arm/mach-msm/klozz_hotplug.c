@@ -733,4 +733,4 @@ MODULE_DESCRIPTION("'klozz_hotplug' - A cpu hotplug driver for "
 	"capable processors");
 MODULE_LICENSE("GPL");
 module_init(klozz_hotplug_init);
-module_exit(klozz_hotplug_exit); 
+//module_exit(klozz_hotplug_exit); 
