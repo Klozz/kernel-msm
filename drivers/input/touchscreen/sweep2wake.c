@@ -82,7 +82,7 @@ MODULE_LICENSE("GPLv2");
 #define S2W_X_FINAL             300
 */
 
-#ifdef CONFIG_ARCH_MSM8226
+//#ifdef CONFIG_ARCH_MSM8226
 /* FALCON FALCON MSM8226 Moto G*/
 #define S2W_Y_MAX               1280
 #define S2W_X_MAX               720
@@ -101,10 +101,10 @@ MODULE_LICENSE("GPLv2");
 //#define DEFAULT_S2W_X_FINAL           160
 #define DEFAULT_S2W_X_FINAL 		275
 #define DEFAULT_S2W_Y_NEXT 		180
-#endif
+//#endif
 
 /* Wake Gestures */
-#define SWEEP_TIMEOUT		30
+#define SWEEP_TIMEOUT		20
 #define TRIGGER_TIMEOUT		50
 #define WAKE_GESTURE		0x0b
 #define SWEEP_RIGHT		0x01
