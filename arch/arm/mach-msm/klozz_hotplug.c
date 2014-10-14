@@ -484,13 +484,13 @@ static ssize_t store_##file_name##_##num_core##_##up_down		\
 }
 
 /* hotplug freq */
-show_hotplug_param(hotplug_freq, 1, 1);
-show_hotplug_param(hotplug_freq, 2, 0);
+show_hotplug_param(hotplug_freq, 1, 1);//cpu0
+show_hotplug_param(hotplug_freq, 2, 0);//cpu1
 #if NR_CPUS >= 4
-show_hotplug_param(hotplug_freq, 2, 1);
-show_hotplug_param(hotplug_freq, 3, 0);
-show_hotplug_param(hotplug_freq, 3, 1);
-show_hotplug_param(hotplug_freq, 4, 0);
+show_hotplug_param(hotplug_freq, 2, 1);//cpu1 on
+show_hotplug_param(hotplug_freq, 3, 0);//cpu2 offline_cpu
+show_hotplug_param(hotplug_freq, 3, 1);//cpu2 online_cpu
+show_hotplug_param(hotplug_freq, 4, 0);//cpu3
 #endif
 /* hotplug load */
 show_hotplug_param(hotplug_load, 1, 1);
