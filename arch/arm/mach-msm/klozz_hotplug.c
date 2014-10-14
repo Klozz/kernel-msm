@@ -143,12 +143,26 @@ static unsigned int get_nr_run_avg(void)
 
 	return nr_run_avg;
 }
-
+/* here if you port to other device you need set the CPU freq to our device*/
 static unsigned int hotplug_freq[NR_CPUS][2] = {
-	{0, 1242000},
-	{810000, 1566000},
-	{918000, 1674000},
-	{1026000, 0}
+#ifdef CONFIG_ARCH_MSM8226
+#ifdef CONFIG_CPU_OVERCLOCK
+	{0, 1593600},
+	{998400, 1344000},
+	{998400, 1497600},
+	{1593600, 0}
+#else
+	{0, 1190400},
+	{810000, 1190400},
+	{600000, 1094400},
+	{1190400, 0}
+#endif
+#else
+	{0, 1190400},
+	{810000, 1190400},
+	{600000, 1094400},
+	{1190400, 0}
+#endif
 };
 static int hotplug_load[NR_CPUS][2] = {
 	{0, 60},
