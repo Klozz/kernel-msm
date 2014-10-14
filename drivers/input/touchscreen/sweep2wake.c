@@ -226,7 +226,7 @@ static void detect_sweep2wake_v(int x, int y, bool st)
 
 	if (x > 100 && x < 620) {
 		//up
-		if (firsty > 960 && single_touch && (s2w_switch & SWEEP_UP)) {
+		if (firsty > 720 && single_touch && (s2w_switch & SWEEP_UP)) {
 			prevy = firsty;
 			nexty = prevy - S2W_Y_NEXT;
 			if (barriery[0] == true || (y < prevy && y > nexty)) {
@@ -253,7 +253,7 @@ static void detect_sweep2wake_v(int x, int y, bool st)
 				}
 			}
 		//down
-		} else if (firsty <= 960 && single_touch && (s2w_switch & SWEEP_DOWN)) {
+		} else if (firsty <= 720 && single_touch && (s2w_switch & SWEEP_DOWN)) {
 			prevy = firsty;
 			nexty = prevy + S2W_Y_NEXT;
 			if (barriery[0] == true || (y > prevy && y < nexty)) {
@@ -548,8 +548,8 @@ static ssize_t s2w_sweep2wake_dump(struct device *dev,
 	if (s2w_switch < 0 || s2w_switch > 15)
 		s2w_switch = 15;
 	
-	if (scr_suspended && !dt2w_switch && !s2w_switch) {
-		wake_pwrtrigger();
+	if (s2w_scr_suspended && !dt2w_switch && !s2w_switch) {
+		sweep2wake_pwrtrigger();
 	}
 
 	return count;
