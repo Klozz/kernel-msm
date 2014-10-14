@@ -29,6 +29,8 @@ extern int down_kcal, up_kcal;
 extern int update_preset_lcdc_lut_s2d(int lut_trigger);
 extern int gestures_switch;
 extern int vib_strength;
+void wake_pwrtrigger(void);
+
 #if !defined(CONFIG_TOUCHSCREEN_SWEEP2WAKE)
 int s2w_switch = 0;
 #else

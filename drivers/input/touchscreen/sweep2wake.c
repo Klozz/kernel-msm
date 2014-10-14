@@ -28,6 +28,7 @@
 #include <linux/delay.h>
 #include <linux/init.h>
 #include <linux/err.h>
+#include <linux/input/doubletap2wake.h>
 #include <linux/input/sweep2wake.h>
 #include <linux/slab.h>
 #include <linux/workqueue.h>
@@ -546,6 +547,10 @@ static ssize_t s2w_sweep2wake_dump(struct device *dev,
 	sscanf(buf, "%d ", &s2w_switch);
 	if (s2w_switch < 0 || s2w_switch > 15)
 		s2w_switch = 15;
+	
+	if (scr_suspended && !dt2w_switch && !s2w_switch) {
+		wake_pwrtrigger();
+	}
 
 	return count;
 }
