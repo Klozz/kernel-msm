@@ -60,15 +60,15 @@ MODULE_LICENSE("GPLv2");
 
 /* Tuneables */
 #define DT2W_DEBUG		0
-#define DT2W_DEFAULT		1
+#define DT2W_DEFAULT		0
 
 #define DT2W_PWRKEY_DUR		20
 #define DT2W_FEATHER		200
 #define DT2W_TIME		600
 
 /* Wake Gestures */
-#define WAKE_GESTURE 0x0b
-#define TRIGGER_TIMEOUT 50
+#define WAKE_GESTURE 		0x0b
+#define TRIGGER_TIMEOUT 	50
 
 extern struct vib_trigger *vib_trigger;
 static struct input_dev *gesture_dev;

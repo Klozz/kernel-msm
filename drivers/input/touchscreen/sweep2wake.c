@@ -60,33 +60,14 @@ MODULE_LICENSE("GPLv2");
 /* Tuneables */
 #define S2W_DEBUG		0
 #define S2W_DEFAULT		1
-#define S2W_S2SONLY_DEFAULT	1
-#define S2W_PWRKEY_DUR          10
-
-#ifdef CONFIG_MACH_MSM8974_HAMMERHEAD
-/* Hammerhead aka Nexus 5 */
-#define S2W_Y_MAX               1920
-#define S2W_X_MAX               1080
-#define S2W_Y_LIMIT             S2W_Y_MAX-130
-#define S2W_X_B1                400
-#define S2W_X_B2                700
-#define S2W_X_FINAL             275
-#define S2W_Y_NEXT              160
-#endif
-/*#else //Generic config
- defaults 
-#define S2W_Y_LIMIT             2350
-#define S2W_X_MAX               1540
-#define S2W_X_B1                500
-#define S2W_X_B2                1000
-#define S2W_X_FINAL             300
-*/
+#define S2W_S2SONLY_DEFAULT	0
+#define S2W_PWRKEY_DUR          60
 
 //#ifdef CONFIG_ARCH_MSM8226
 /* FALCON FALCON MSM8226 Moto G*/
 #define S2W_Y_MAX               1280
 #define S2W_X_MAX               720
-#define S2W_Y_LIMIT             DEFAULT_S2W_Y_MAX-100
+#define S2W_Y_LIMIT             S2W_Y_MAX-100
 #define S2W_X_B1                130
 #define S2W_X_B2                360
 //#define DEFAULT_S2W_X_FINAL           160
@@ -95,7 +76,7 @@ MODULE_LICENSE("GPLv2");
 
 #define DEFAULT_S2W_Y_MAX               1280
 #define DEFAULT_S2W_X_MAX               720
-#define DEFAULT_S2W_Y_LIMIT             DEFAULT_S2W_Y_MAX-100
+#define DEFAULT_S2W_Y_LIMIT             S2W_Y_MAX-100
 #define DEFAULT_S2W_X_B1                130
 #define DEFAULT_S2W_X_B2                360
 //#define DEFAULT_S2W_X_FINAL           160
@@ -104,7 +85,7 @@ MODULE_LICENSE("GPLv2");
 //#endif
 
 /* Wake Gestures */
-#define SWEEP_TIMEOUT		20
+#define SWEEP_TIMEOUT		30
 #define TRIGGER_TIMEOUT		50
 #define WAKE_GESTURE		0x0b
 #define SWEEP_RIGHT		0x01
