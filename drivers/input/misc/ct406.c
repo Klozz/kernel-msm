@@ -172,6 +172,7 @@ struct ct406_data {
 	unsigned int prox_noise_floor;
 	unsigned int prox_low_threshold;
 	unsigned int prox_high_threshold;
+	unsigned int prox_ppers;
 	unsigned int als_low_threshold;
 	unsigned int als_high_threshold;
 	u16 prox_covered_offset;
@@ -420,8 +421,9 @@ static int ct406_init_registers(struct ct406_data *ct)
 		return error;
 
 	/* write proximity interrupt persistence */
+	ct->prox_ppers = CT406_PERS_PPERS;
 	reg_data[0] = CT406_PERS;
-	reg_data[1] = CT406_PERS_PPERS;
+	reg_data[1] = ct->prox_ppers;
 	error = ct406_i2c_write(ct, reg_data, 1);
 	if (error < 0)
 		return error;
@@ -706,7 +708,7 @@ static int ct406_enable_als(struct ct406_data *ct)
 
 	/* write ALS interrupt persistence */
 	reg_data[0] = CT406_PERS;
-	reg_data[1] = CT406_PERS_PPERS;
+	reg_data[1] = ct->prox_ppers;
 	error = ct406_i2c_write(ct, reg_data, 1);
 	if (error < 0) {
 		pr_err("%s: Error  %d\n", __func__, error);
@@ -805,7 +807,17 @@ static void ct406_measure_noise_floor(struct ct406_data *ct)
 	ct->prox_low_threshold = 0;
 	ct->prox_high_threshold = 0;
 	ct406_write_prox_thresholds(ct);
-	pr_info("%s: Prox mode startup\n", __func__);
+
+	ct->prox_ppers = 0;
+	reg_data[0] = CT406_PERS;
+	reg_data[1] = ct->als_apers;
+	error = ct406_i2c_write(ct, reg_data, 1);
+	if (error) {
+		pr_err("%s: Error setting proximity persistance: %d\n",
+			__func__, error);
+		return error;
+	}
+	ct->prox_first_report = 0;
 
 	error = ct406_set_prox_enable(ct, 1);
 	if (error)
@@ -855,6 +867,18 @@ static void ct406_report_prox(struct ct406_data *ct)
 	int error = 0;
 	u8 reg_data[2] = {0};
 	unsigned int pdata = 0;
+
+	if (ct->prox_first_report == 0) {
+		ct->prox_ppers = CT406_PERS_PPERS;
+		reg_data[0] = CT406_PERS;
+		reg_data[1] = ct->prox_ppers | ct->als_apers;
+		error = ct406_i2c_write(ct, reg_data, 1);
+		if (error < 0) {
+			wake_unlock(&ct->wl);
+			return;
+		}
+		ct->prox_first_report = 1;
+	}
 
 	reg_data[0] = (CT406_PDATA | CT406_COMMAND_AUTO_INCREMENT);
 	error = ct406_i2c_read(ct, reg_data, 2);
@@ -1021,7 +1045,7 @@ static void ct406_report_als(struct ct406_data *ct)
 	if (ct->als_first_report == 0) {
 		/* write ALS interrupt persistence */
 		reg_data[0] = CT406_PERS;
-		reg_data[1] = CT406_PERS_PPERS | ct->als_apers;
+		reg_data[1] = ct->prox_ppers | ct->als_apers;
 		error = ct406_i2c_write(ct, reg_data, 1);
 		if (error < 0) {
 			pr_err("%s: Error  %d\n", __func__, error);
