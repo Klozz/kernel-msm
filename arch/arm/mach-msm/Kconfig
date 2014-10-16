@@ -1930,6 +1930,19 @@ config CPU_UNDERCLOCK
 	help
 	Enable CPU underclocking to 96Mhz
 
+config KLOZZ_HOTPLUG
+	  bool "Enable klozz-hotplug cpu hotplug driver"
+	  default n
+	  help
+	  Generic klozz_hotplug cpu hotplug driver for ARM SOCs on the XPerience kernel
+
+config KLOZZ_HOTPLUG_USE_CPU_UTIL
+	  bool "Enable klozz-hotplug cpu statistics utilization"
+	  depends on (KLOZZ_HOTPLUG)
+	  default n
+	help
+	 klozz-hotplug cpu statistics utilization
+
 config MSM_AVS_HW
 	bool "Enable Adaptive Voltage Scaling (AVS)"
 	default n
